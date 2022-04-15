@@ -52,7 +52,7 @@ export default function TotalHarvest() {
         try {
 
           if(isAuthenticated) {
-            const amount = await masterChefContract.methods.pendingAllMeat(account).call();
+            const amount = await masterChefContract.methods.pendingAllBusd(account).call();
             const _userInfo = await meatVaultContract.methods.userInfo(account).call();
             const _canClaim = await meatVaultContract.methods.getEnableWithdraw(account).call();
             setPendingAmount(amount);

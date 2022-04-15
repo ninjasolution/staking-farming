@@ -963,10 +963,10 @@ interface IMigratorChef {
     function migrate(IBEP20 token) external returns (IBEP20);
 }
 
-// MasterChef is the master of Meat. He can make Meat and he is a fair guy.
+// MasterChef is the master of busd. He can make busd and he is a fair guy.
 //
 // Note that it's ownable and the owner wields tremendous power. The ownership
-// will be transferred to a governance smart contract once Meat is sufficiently
+// will be transferred to a governance smart contract once busd is sufficiently
 // distributed and the community can show to govern itself.
 //
 // Have fun reading it. Hopefully it's bug-free. God bless.
@@ -979,13 +979,13 @@ contract LockBitx is Ownable {
         uint256 amount;     // How many LP tokens the user has provided.
         uint256 rewardDebt; // Reward debt. See explanation below.
         //
-        // We do some fancy math here. Basically, any point in time, the amount of Meats
+        // We do some fancy math here. Basically, any point in time, the amount of busds
         // entitled to a user but is pending to be distributed is:
         //
-        //   pending reward = (user.amount * pool.accMeatPerShare) - user.rewardDebt
+        //   pending reward = (user.amount * pool.accBusdPerShare) - user.rewardDebt
         //
         // Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
-        //   1. The pool's `accMeatPerShare` (and `lastRewardBlock`) gets updated.
+        //   1. The pool's `accBusdPerShare` (and `lastRewardBlock`) gets updated.
         //   2. User receives the pending reward sent to his/her address.
         //   3. User's `amount` gets updated.
         //   4. User's `rewardDebt` gets updated.
@@ -994,22 +994,20 @@ contract LockBitx is Ownable {
 
     // Info of each pool.
     IBEP20 public lpToken;           // Address of LP token contract.
-    uint256 public allocPoint;       // How many allocation points assigned to this pool. Meats to distribute per block.
-    uint256 public lastRewardBlock;  // Last block number that Meats distribution occurs.
-    uint256 public accMeatPerShare; // Accumulated Meats per share, times 1e12. See below.
+    uint256 public allocPoint;       // How many allocation points assigned to this pool. busds to distribute per block.
+    uint256 public lastRewardBlock;  // Last block number that busds distribution occurs.
+    uint256 public accBusdPerShare; // Accumulated busds per share, times 1e12. See below.
 
     // The BITX TOKEN!
     BEP20 public bitx;
-    // The MEAT TOKEN!
+    // The busd TOKEN!
     BEP20 public busd;
-    // Dev address.
-    address public devaddr;
-    // Meat tokens created per block.
+   // busd tokens created per block.
     uint256 public busdPerBlock;
-    // Bonus muliplier for early Meat makers.
+    // Bonus muliplier for early busd makers.
     uint256 public BONUS_MULTIPLIER = 1;
 
-    uint256 public withdrawFeePeriod = 720 days; // 30 days
+    uint256 public withdrawFeePeriod = 180 days; // 30 days
     // The migrator contract. It has a lot of power. Can only be set through governance (owner).
     IMigratorChef public migrator;
 
@@ -1017,7 +1015,7 @@ contract LockBitx is Ownable {
     mapping (address => UserInfo) public userInfo;
     // Total allocation poitns. Must be the sum of all allocation points in all pools.
     uint256 public totalAllocPoint = 0;
-    // The block number when Meat mining starts.
+    // The block number when busd mining starts.
     uint256 public startBlock;
 
     event Deposit(address indexed user, uint256 amount);
@@ -1027,23 +1025,34 @@ contract LockBitx is Ownable {
     constructor(
         BEP20 _bitx,
         BEP20 _busd,
-        address _devaddr,
-        uint256 _meatPerBlock,
+        uint256 _busdPerBlock,
         uint256 _startBlock
     ) {
         bitx = _bitx;
         busd = _busd;
-        devaddr = _devaddr;
-        busdPerBlock = _meatPerBlock;
+        busdPerBlock = _busdPerBlock;
         startBlock = _startBlock;
 
         // staking pool
         lpToken = _bitx;
         allocPoint = 1000;
         lastRewardBlock = startBlock;
-        accMeatPerShare = 0;
+        accBusdPerShare = 0;
 
         totalAllocPoint = 1000;
+    }
+
+    
+    function setBitx(BEP20 _bitx) external {
+        bitx = _bitx;
+    }
+
+    function setBusd(BEP20 _busd) external {
+        busd = _busd;
+    }
+
+    function setBusdPerBlock(uint256 _busdPerBlock) external {
+        busdPerBlock = _busdPerBlock;
     }
 
     function setWithdrawFeePeriod(uint256 _period) external onlyOwner {
@@ -1070,16 +1079,16 @@ contract LockBitx is Ownable {
     }
 
     // View function to see pending Busds on frontend.
-    function pendingMeat(address _user) external view returns (uint256) {
+    function pendingBusd(address _user) external view returns (uint256) {
         UserInfo storage user = userInfo[_user];
-        uint256 newAccMeatPerShare = accMeatPerShare;
+        uint256 newaccBusdPerShare = accBusdPerShare;
         uint256 lpSupply = lpToken.balanceOf(address(this));
         if (block.number > lastRewardBlock && lpSupply != 0) {
             uint256 multiplier = getMultiplier(lastRewardBlock, block.number);
-            uint256 meatReward = multiplier.mul(meatPerBlock).mul(allocPoint).div(totalAllocPoint);
-            newAccMeatPerShare = accMeatPerShare.add(meatReward.mul(1e12).div(lpSupply));
+            uint256 busdReward = multiplier.mul(busdPerBlock).mul(allocPoint).div(totalAllocPoint);
+            newaccBusdPerShare = accBusdPerShare.add(busdReward.mul(1e12).div(lpSupply));
         }
-        return user.amount.mul(newAccMeatPerShare).div(1e12).sub(user.rewardDebt);
+        return user.amount.mul(newaccBusdPerShare).div(1e12).sub(user.rewardDebt);
     }
     
     // Update reward variables of the given pool to be up-to-date.
@@ -1093,8 +1102,8 @@ contract LockBitx is Ownable {
             return;
         }
         uint256 multiplier = getMultiplier(lastRewardBlock, block.number);
-        uint256 meatReward = multiplier.mul(meatPerBlock).mul(allocPoint).div(totalAllocPoint);
-        accMeatPerShare = accMeatPerShare.add(meatReward.mul(1e12).div(lpSupply));
+        uint256 busdReward = multiplier.mul(busdPerBlock).mul(allocPoint).div(totalAllocPoint);
+        accBusdPerShare = accBusdPerShare.add(busdReward.mul(1e12).div(lpSupply));
         lastRewardBlock = block.number;
     }
 
@@ -1104,16 +1113,16 @@ contract LockBitx is Ownable {
         UserInfo storage user = userInfo[msg.sender];
         updatePool();
         if (user.amount > 0) {
-            uint256 pending = user.amount.mul(accMeatPerShare).div(1e12).sub(user.rewardDebt);
+            uint256 pending = user.amount.mul(accBusdPerShare).div(1e12).sub(user.rewardDebt);
             if(pending > 0) {
-                safeMeatTransfer(msg.sender, pending);
+                safeBusdTransfer(msg.sender, pending);
             }
         }
         if (_amount > 0) {
             lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
             user.amount = user.amount.add(_amount);
         }
-        user.rewardDebt = user.amount.mul(accMeatPerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(accBusdPerShare).div(1e12);
         user.lastDepositedTime = block.timestamp;
         emit Deposit(msg.sender, _amount);
     }
@@ -1124,16 +1133,16 @@ contract LockBitx is Ownable {
         UserInfo storage user = userInfo[msg.sender];
         require(user.amount >= _amount, "withdraw: not good");
         updatePool();
-        uint256 pending = user.amount.mul(accMeatPerShare).div(1e12).sub(user.rewardDebt);
+        uint256 pending = user.amount.mul(accBusdPerShare).div(1e12).sub(user.rewardDebt);
         if(pending > 0) {
-            safeMeatTransfer(msg.sender, pending);
+            safeBusdTransfer(msg.sender, pending);
         }
 
         if(_amount > 0 && block.timestamp > user.lastDepositedTime.add(withdrawFeePeriod)) {
             user.amount = user.amount.sub(_amount);
             lpToken.safeTransfer(address(msg.sender), _amount);
         }
-        user.rewardDebt = user.amount.mul(accMeatPerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(accBusdPerShare).div(1e12);
         emit Withdraw(msg.sender, _amount);
     }
 
@@ -1148,13 +1157,8 @@ contract LockBitx is Ownable {
 
 
     // Safe Busd transfer function, just in case if rounding error causes pool to not have enough Busd.
-    function safeMeatTransfer(address _to, uint256 _amount) internal {
+    function safeBusdTransfer(address _to, uint256 _amount) internal {
         busd.transfer(_to, _amount);
     }
 
-    // Update dev address by the previous dev.
-    function dev(address _devaddr) public {
-        require(msg.sender == devaddr, "dev: wut?");
-        devaddr = _devaddr;
-    }
 }

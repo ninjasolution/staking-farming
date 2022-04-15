@@ -148,16 +148,17 @@ function Header() {
     let busd = assets?.find(a => a.token_address === BUSDAddr.toLocaleLowerCase());
     let usdt = assets?.find(a => a.token_address === USDTAddr.toLocaleLowerCase());
     let eth = assets?.find(a => a.token_address === ETHAddr.toLocaleLowerCase());
+    console.log(usdt)
     if(typeof busd !== "undefined" && busd?.balance !== null) {
-      setBalances({...balances, busd: busd.balance})
+      setBalances({...balances, busd: (busd.balance/Math.pow(10, 18)).toFixed(3)})
     }
 
     if(typeof eth !== "undefined" && eth?.balance !== null) {
-      setBalances({...balances, eth: eth.balance})
+      setBalances({...balances, eth: (eth.balance/Math.pow(10, 18)).toFixed(3)})
     }
 
     if(typeof usdt !== "undefined" && usdt?.balance !== null) {
-      setBalances({...balances, usdt: usdt.balance})
+      setBalances({...balances, usdt: (usdt.balance/Math.pow(10, 18)).toFixed(3)})
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

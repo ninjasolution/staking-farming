@@ -73,7 +73,7 @@ export default function LockToken() {
   
           calls = [
             { address: MeatVaultAddr, name: 'userInfo', params: [account] },
-            { address: MeatVaultAddr, name: 'pendingMeat', params: [account] },
+            { address: MeatVaultAddr, name: 'pendingBusd', params: [account] },
             { address: MeatVaultAddr, name: 'getEnableWithdraw', params: [account] },
           ]
   

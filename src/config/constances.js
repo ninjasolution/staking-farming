@@ -1,6 +1,6 @@
-export const MasterChefAddr = "0x04aDdb50096cC6F06aF9d38B78E2e0f8C6a85C7c";
+export const MasterChefAddr = "0x377E420B7d6aBABA10344601c023c4b3b2381d60";
 
-export const MeatVaultAddr = "0x1AB801275326C970FD38FAcDF1d1288d520FF73d";
+export const MeatVaultAddr = "0x7cE6a9741eeDB7a492c6329Af011014A87762cdb";
 
 export const BitxAddr = "0xBb622cEba240980B3D6A200108e1753bc928ADb3";
 
@@ -19,14 +19,14 @@ export const USDTAddr = "0x55d398326f99059fF775485246999027B3197955";
 
 export const ETHAddr = "0x2170Ed0880ac9A755fd29B2688956BD959F933F8";
 
-export const CAKE_PER_YEAR = 1000000;
+export const CAKE_PER_YEAR = 12614;
 
-export const TotalAllocPoint = 30000;
+export const TotalAllocPoint = 1500;
 
 export const lpAprs = {
-    [UsdtBitxLpAddr]: 117.66,
-    [BusdBitxLpAddr]: 4.33,
-    [BitxbusdLpAddr]: 24.08,
+    [UsdtBitxLpAddr]: 5,
+    [BusdBitxLpAddr]: 5,
+    [BitxbusdLpAddr]: 5,
 }
 
 export const Farms = [
@@ -43,7 +43,7 @@ export const Farms = [
         lpSymbol: 'BUSD-BITX LP',
         logo: "./img/d.png",
         lpAddresses: "0x6e7E318067cB9b814A2F88E04559E1b0ada5d24A",
-        token: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
+        token: "0x6e7E318067cB9b814A2F88E04559E1b0ada5d24A",
         quoteToken: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
     },
     {

@@ -963,10 +963,10 @@ interface IMigratorChef {
     function migrate(IBEP20 token) external returns (IBEP20);
 }
 
-// MasterChef is the master of Meat. He can make Meat and he is a fair guy.
+// MasterChef is the master of Busd. He can make Busd and he is a fair guy.
 //
 // Note that it's ownable and the owner wields tremendous power. The ownership
-// will be transferred to a governance smart contract once Meat is sufficiently
+// will be transferred to a governance smart contract once Busd is sufficiently
 // distributed and the community can show to govern itself.
 //
 // Have fun reading it. Hopefully it's bug-free. God bless.
@@ -979,7 +979,7 @@ contract MasterChef is Ownable {
         uint256 amount;     // How many LP tokens the user has provided.
         uint256 rewardDebt; // Reward debt. See explanation below.
         //
-        // We do some fancy math here. Basically, any point in time, the amount of Meats
+        // We do some fancy math here. Basically, any point in time, the amount of Busds
         // entitled to a user but is pending to be distributed is:
         //
         //   pending reward = (user.amount * pool.accBusdPerShare) - user.rewardDebt
@@ -994,17 +994,15 @@ contract MasterChef is Ownable {
     // Info of each pool.
     struct PoolInfo {
         IBEP20 lpToken;           // Address of LP token contract.
-        uint256 allocPoint;       // How many allocation points assigned to this pool. Meats to distribute per block.
-        uint256 lastRewardBlock;  // Last block number that Meats distribution occurs.
-        uint256 accBusdPerShare; // Accumulated Meats per share, times 1e12. See below.
+        uint256 allocPoint;       // How many allocation points assigned to this pool. Busds to distribute per block.
+        uint256 lastRewardBlock;  // Last block number that Busds distribution occurs.
+        uint256 accBusdPerShare; // Accumulated Busds per share, times 1e12. See below.
     }
 
     // The BITX TOKEN!
     BEP20 public bitx;
     // The BUSD TOKEN!
     BEP20 public busd;
-    // Dev address.
-    address public devaddr;
     // BUSD tokens created per block.
     uint256 public busdPerBlock;
     // Bonus muliplier for early BUSD makers.
@@ -1028,13 +1026,11 @@ contract MasterChef is Ownable {
     constructor(
         BEP20 _bitx,
         BEP20 _busd,
-        address _devaddr,
         uint256 _busdPerBlock,
         uint256 _startBlock
     ) {
         bitx = _bitx;
         busd = _busd;
-        devaddr = _devaddr;
         busdPerBlock = _busdPerBlock;
         startBlock = _startBlock;
 
@@ -1047,6 +1043,18 @@ contract MasterChef is Ownable {
         }));
 
         totalAllocPoint = 1000;
+    }
+
+    function setBitx(BEP20 _bitx) external {
+        bitx = _bitx;
+    }
+
+    function setBusd(BEP20 _busd) external {
+        busd = _busd;
+    }
+
+    function setBusdPerBlock(uint256 _busdPerBlock) external {
+        busdPerBlock = _busdPerBlock;
     }
 
     function updateMultiplier(uint256 multiplierNumber) public onlyOwner {
@@ -1074,7 +1082,7 @@ contract MasterChef is Ownable {
         updateStakingPool();
     }
 
-    // Update the given pool's Meat allocation point. Can only be called by the owner.
+    // Update the given pool's Busd allocation point. Can only be called by the owner.
     function set(uint256 _pid, uint256 _allocPoint, bool _withUpdate) public onlyOwner {
         if (_withUpdate) {
             massUpdatePools();
@@ -1122,8 +1130,8 @@ contract MasterChef is Ownable {
         return _to.sub(_from).mul(BONUS_MULTIPLIER);
     }
 
-    // View function to see pending Meats on frontend.
-    function pendingMeat(uint256 _pid, address _user) external view returns (uint256) {
+    // View function to see pending Busds on frontend.
+    function pendingBusd(uint256 _pid, address _user) external view returns (uint256) {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][_user];
         uint256 accBusdPerShare = pool.accBusdPerShare;
@@ -1136,8 +1144,8 @@ contract MasterChef is Ownable {
         return user.amount.mul(accBusdPerShare).div(1e12).sub(user.rewardDebt);
     }
 
-    // View function to see pending Meats on frontend.
-    function pendingAllMeat(address _user) external view returns (uint256) {
+    // View function to see pending Busds on frontend.
+    function pendingAllBusd(address _user) external view returns (uint256) {
 
         uint256 amount = 0;
         for(uint i=1 ; i<poolInfo.length ; i++) {
@@ -1180,10 +1188,10 @@ contract MasterChef is Ownable {
         pool.lastRewardBlock = block.number;
     }
 
-    // Deposit LP tokens to MasterChef for Meat allocation.
+    // Deposit LP tokens to MasterChef for Busd allocation.
     function deposit(uint256 _pid, uint256 _amount) public {
 
-        require (_pid != 0, 'deposit Meat by staking');
+        require (_pid != 0, 'deposit Busd by staking');
 
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
@@ -1191,7 +1199,7 @@ contract MasterChef is Ownable {
         if (user.amount > 0) {
             uint256 pending = user.amount.mul(pool.accBusdPerShare).div(1e12).sub(user.rewardDebt);
             if(pending > 0) {
-                safeMeatTransfer(msg.sender, pending);
+                safeBusdTransfer(msg.sender, pending);
             }
         }
         if (_amount > 0) {
@@ -1205,7 +1213,7 @@ contract MasterChef is Ownable {
     // Withdraw LP tokens from MasterChef.
     function withdraw(uint256 _pid, uint256 _amount) public {
 
-        require (_pid != 0, 'withdraw Meat by unstaking');
+        require (_pid != 0, 'withdraw Busd by unstaking');
 
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
@@ -1213,7 +1221,7 @@ contract MasterChef is Ownable {
         updatePool(_pid);
         uint256 pending = user.amount.mul(pool.accBusdPerShare).div(1e12).sub(user.rewardDebt);
         if(pending > 0) {
-            safeMeatTransfer(msg.sender, pending);
+            safeBusdTransfer(msg.sender, pending);
         }
         if(_amount > 0) {
             user.amount = user.amount.sub(_amount);
@@ -1223,7 +1231,7 @@ contract MasterChef is Ownable {
         emit Withdraw(msg.sender, _pid, _amount);
     }
 
-    // Stake Meat tokens to MasterChef
+    // Stake Busd tokens to MasterChef
     function enterStaking(uint256 _amount) public {
         PoolInfo storage pool = poolInfo[0];
         UserInfo storage user = userInfo[0][msg.sender];
@@ -1231,7 +1239,7 @@ contract MasterChef is Ownable {
         if (user.amount > 0) {
             uint256 pending = user.amount.mul(pool.accBusdPerShare).div(1e12).sub(user.rewardDebt);
             if(pending > 0) {
-                safeMeatTransfer(msg.sender, pending);
+                safeBusdTransfer(msg.sender, pending);
             }
         }
         if(_amount > 0) {
@@ -1243,7 +1251,7 @@ contract MasterChef is Ownable {
         emit Deposit(msg.sender, 0, _amount);
     }
 
-    // Withdraw Meat tokens from STAKING.
+    // Withdraw Busd tokens from STAKING.
     function leaveStaking(uint256 _amount) public {
         PoolInfo storage pool = poolInfo[0];
         UserInfo storage user = userInfo[0][msg.sender];
@@ -1251,7 +1259,7 @@ contract MasterChef is Ownable {
         updatePool(0);
         uint256 pending = user.amount.mul(pool.accBusdPerShare).div(1e12).sub(user.rewardDebt);
         if(pending > 0) {
-            safeMeatTransfer(msg.sender, pending);
+            safeBusdTransfer(msg.sender, pending);
         }
         if(_amount > 0) {
             user.amount = user.amount.sub(_amount);
@@ -1293,14 +1301,10 @@ contract MasterChef is Ownable {
         }
     }
 
-    // Safe Meat transfer function, just in case if rounding error causes pool to not have enough Meats.
-    function safeMeatTransfer(address _to, uint256 _amount) internal {
+    // Safe Busd transfer function, just in case if rounding error causes pool to not have enough Busds.
+    function safeBusdTransfer(address _to, uint256 _amount) internal {
         busd.transfer(_to, _amount);
     }
 
-    // Update dev address by the previous dev.
-    function dev(address _devaddr) public {
-        require(msg.sender == devaddr, "dev: wut?");
-        devaddr = _devaddr;
-    }
+    
 }

@@ -88,7 +88,7 @@ export default function LpTokens() {
             calls = [
               { address: MasterChefAddr, name: 'poolInfo', params: [Farms[i].pid] },
               { address: MasterChefAddr, name: 'userInfo', params: [Farms[i].pid, account] },
-              { address: MasterChefAddr, name: 'pendingMeat', params: [Farms[i].pid, account] },
+              { address: MasterChefAddr, name: 'pendingBusd', params: [Farms[i].pid, account] },
             ]
     
             let res1 = await fnMulticall(MasterChef.abi, calls);
