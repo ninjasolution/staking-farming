@@ -78,34 +78,34 @@ function Header() {
   const nav_list_menu = [
     {
       id: 1,
-      name: "Swap",
-      link: "#",
+      name: "Dapp",
+      link: "https://steakstake.io/dapp",
       classList: "active_link",
     },
     {
       id: 2,
-      name: "Liquidity",
-      link: "#",
+      name: "Swap",
+      link: "https://steakstake.io/swap",
       classList: "",
     },
     {
       id: 3,
       name: "Staking",
-      link: "#",
+      link: "https://steakstake.io/staking",
       classList: "",
     },
     {
       id: 4,
-      name: "Farm",
-      link: "#",
+      name: "Disclamer",
+      link: "https://steakstake.io/disclamer",
       classList: "",
     },
-    // {
-    //   id: 5,
-    //   name: "Reward",
-    //   link: "#",
-    //   classList: "",
-    // },
+    {
+      id: 5,
+      name: "Policy",
+      link: "https://steakstake.io/policy",
+      classList: "",
+    },
   ];
 
   const nav_list_user = [
