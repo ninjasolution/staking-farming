@@ -78,9 +78,9 @@ export default function LpTokens() {
           if(isAuthenticated) {
             console.log(account)
             let calls = [
-              { address: Farms[i].lpAddresses, name: 'allowance', params: [account, MasterChefAddr] },
-              { address: Farms[i].lpAddresses, name: 'balanceOf', params: [account] },
-              { address: Farms[i].lpAddresses, name: 'balanceOf', params: [MasterChefAddr] },
+              { address: Farms[i].lpAddress, name: 'allowance', params: [account, MasterChefAddr] },
+              { address: Farms[i].lpAddress, name: 'balanceOf', params: [account] },
+              { address: Farms[i].lpAddress, name: 'balanceOf', params: [MasterChefAddr] },
             ]
     
             let res = await fnMulticall(BEP20.abi, calls);
@@ -104,11 +104,11 @@ export default function LpTokens() {
             allowance = new BigNumber(res[0]).toJSON();
             balance = new BigNumber(res[1]).toJSON();
             liquidity = new BigNumber(res[2]).toJSON();
-            apr = (getFarmApr(poolWeight, 9, formatPrice(res[2])*0.1, Farms[i].lpAddresses).cakeRewardsApr)?.toFixed(3);
+            apr = (getFarmApr(poolWeight, 9, formatPrice(res[2])*0.1, Farms[i].lpAddress).cakeRewardsApr)?.toFixed(3);
   
           }else {
             calls = [
-              { address: Farms[i].lpAddresses, name: 'balanceOf', params: [MasterChefAddr] },
+              { address: Farms[i].lpAddress, name: 'balanceOf', params: [MasterChefAddr] },
             ]
             
             
@@ -335,6 +335,7 @@ export default function LpTokens() {
                                 <a
                                   href={`https://pancakeswap.finance/add/BNB/${v.lpAddress}`}
                                   className="content_link"
+                                  target={"_blank"} rel="noreferrer"
                                 >
                                   Get {`${v.lpSymbol} `}
                                   <svg
@@ -361,6 +362,7 @@ export default function LpTokens() {
                                 <a
                                   href={`https://bscscan.com/address/${v.lpAddress}`}
                                   className="content_link"
+                                  target={"_blank"} rel="noreferrer"
                                 >
                                   View contract{" "}
                                   <svg
@@ -430,7 +432,7 @@ export default function LpTokens() {
                                   ) 
                                   :
                                   <button className="btn_connect_wallet" onClick={() => {
-                                    enableBitxHandler(v.pid, v.lpAddresses);
+                                    enableBitxHandler(v.pid, v.lpAddress);
                                   }}>Enable</button>
                                   :
                                   <button className="btn_connect_wallet" onClick={() => {
