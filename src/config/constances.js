@@ -43,7 +43,7 @@ export const Farms = [
         lpSymbol: 'BUSD-BITX LP',
         logo: "./img/d.png",
         lpAddress: "0x6e7E318067cB9b814A2F88E04559E1b0ada5d24A",
-        token: "0x6e7E318067cB9b814A2F88E04559E1b0ada5d24A",
+        token: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
         quoteToken: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
     },
     {
@@ -51,7 +51,7 @@ export const Farms = [
         lpSymbol: 'BNB-BITX LP',
         logo: "./img/d.png",
         lpAddress: "0xaF7470E99bA6F624DF58C4ebeCdAaA9922376Ca1",
-        token: "0x55d398326f99059fF775485246999027B3197955",
+        token: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
         quoteToken: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
     }
 ]

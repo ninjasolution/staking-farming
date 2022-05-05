@@ -333,7 +333,7 @@ export default function LpTokens() {
                               </li>
                               <li>
                                 <a
-                                  href={`https://pancakeswap.finance/add/BNB/${v.lpAddress}`}
+                                  href={`https://pancakeswap.finance/add/BNB/${v.token}`}
                                   className="content_link"
                                   target={"_blank"} rel="noreferrer"
                                 >
