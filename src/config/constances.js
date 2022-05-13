@@ -1,6 +1,6 @@
 export const MasterChefAddr = "0x5EC2f3aBb2EF1A5C463071B8773DF54623312cdC";
 
-export const MeatVaultAddr = "0xF45d85DaF7fC4229e30C9949d17891c2109E5b2F";
+export const MeatVaultAddr = "0x0350C4D343F51f75114F4bd65Cba44508d4A758c";
 
 export const BitxAddr = "0x72e426688eA777178e545dD6FA03e922223c7099";
 

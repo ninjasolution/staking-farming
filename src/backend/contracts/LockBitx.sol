@@ -993,13 +993,11 @@ contract LockBitx is Ownable {
     }
 
     // Info of each pool.
-    IBEP20 public lpToken;           // Address of LP token contract.
+    IBEP20 public bitx;           // Address of LP token contract.
     uint256 public allocPoint;       // How many allocation points assigned to this pool. busds to distribute per block.
     uint256 public lastRewardBlock;  // Last block number that busds distribution occurs.
     uint256 public accBusdPerShare; // Accumulated busds per share, times 1e12. See below.
 
-    // The BITX TOKEN!
-    BEP20 public bitx;
     // The busd TOKEN!
     BEP20 public busd;
    // busd tokens created per block.
@@ -1034,7 +1032,6 @@ contract LockBitx is Ownable {
         startBlock = _startBlock;
 
         // staking pool
-        lpToken = _bitx;
         allocPoint = 1000;
         lastRewardBlock = startBlock;
         accBusdPerShare = 0;
@@ -1082,7 +1079,7 @@ contract LockBitx is Ownable {
     function pendingBusd(address _user) external view returns (uint256) {
         UserInfo storage user = userInfo[_user];
         uint256 newaccBusdPerShare = accBusdPerShare;
-        uint256 lpSupply = lpToken.balanceOf(address(this));
+        uint256 lpSupply = bitx.balanceOf(address(this));
         if (block.number > lastRewardBlock && lpSupply != 0) {
             uint256 multiplier = getMultiplier(lastRewardBlock, block.number);
             uint256 busdReward = multiplier.mul(busdPerBlock).mul(allocPoint).div(totalAllocPoint);
@@ -1096,7 +1093,7 @@ contract LockBitx is Ownable {
         if (block.number <= lastRewardBlock) {
             return;
         }
-        uint256 lpSupply = lpToken.balanceOf(address(this));
+        uint256 lpSupply = bitx.balanceOf(address(this));
         if (lpSupply == 0) {
             lastRewardBlock = block.number;
             return;
@@ -1119,7 +1116,7 @@ contract LockBitx is Ownable {
             }
         }
         if (_amount > 0) {
-            lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
+            bitx.safeTransferFrom(address(msg.sender), address(this), _amount);
             user.amount = user.amount.add(_amount);
         }
         user.rewardDebt = user.amount.mul(accBusdPerShare).div(1e12);
@@ -1140,7 +1137,7 @@ contract LockBitx is Ownable {
 
         if(_amount > 0 && block.timestamp > user.lastDepositedTime.add(withdrawFeePeriod)) {
             user.amount = user.amount.sub(_amount);
-            lpToken.safeTransfer(address(msg.sender), _amount);
+            bitx.safeTransfer(address(msg.sender), _amount);
         }
         user.rewardDebt = user.amount.mul(accBusdPerShare).div(1e12);
         emit Withdraw(msg.sender, _amount);
@@ -1149,7 +1146,7 @@ contract LockBitx is Ownable {
     // Withdraw without caring about rewards. EMERGENCY ONLY.
     function emergencyWithdraw() public {
         UserInfo storage user = userInfo[msg.sender];
-        lpToken.safeTransfer(address(msg.sender), user.amount);
+        bitx.safeTransfer(address(msg.sender), user.amount);
         emit EmergencyWithdraw(msg.sender, user.amount);
         user.amount = 0;
         user.rewardDebt = 0;
