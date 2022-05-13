@@ -1,17 +1,17 @@
-export const MasterChefAddr = "0x377E420B7d6aBABA10344601c023c4b3b2381d60";
+export const MasterChefAddr = "0x5EC2f3aBb2EF1A5C463071B8773DF54623312cdC";
 
-export const MeatVaultAddr = "0x7cE6a9741eeDB7a492c6329Af011014A87762cdb";
+export const MeatVaultAddr = "0xF45d85DaF7fC4229e30C9949d17891c2109E5b2F";
 
-export const BitxAddr = "0xBb622cEba240980B3D6A200108e1753bc928ADb3";
+export const BitxAddr = "0x72e426688eA777178e545dD6FA03e922223c7099";
 
-export const UsdtBitxLpAddr = "0x3024b37aC5499F0e15A19849Cdf130A8E60BDD9b";
+export const UsdtBitxLpAddr = "0xfD04202CdeAbD9EBda2D4aa7F7569ed23F7ccC3a";
 
-export const BusdBitxLpAddr = "0x6e7E318067cB9b814A2F88E04559E1b0ada5d24A";
+export const BusdBitxLpAddr = "0x898393FD706DC9128f57e7A46DE763840c2Ff393";
 
-export const BitxbusdLpAddr = "0xaF7470E99bA6F624DF58C4ebeCdAaA9922376Ca1";
+export const BitxbusdLpAddr = "0xb1b6e19D5288d98C4c868bb78D241425dC60d5e1";
 
-// export const MulticallAddr = "0x6e5BB1a5Ad6F68A8D7D6A5e47750eC15773d6042"; //testnet
-export const MulticallAddr = "0x41263cba59eb80dc200f3e2544eda4ed6a90e76c";
+export const MulticallAddr = "0x6e5BB1a5Ad6F68A8D7D6A5e47750eC15773d6042"; //testnet
+// export const MulticallAddr = "0x41263cba59eb80dc200f3e2544eda4ed6a90e76c";
 
 export const BUSDAddr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
 
@@ -34,25 +34,25 @@ export const Farms = [
         pid: 1,
         lpSymbol: 'BITX-USDT LP',
         logo: "./img/t.png",
-        lpAddress: "0x3024b37aC5499F0e15A19849Cdf130A8E60BDD9b",
-        token: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
-        quoteToken: "0x55d398326f99059fF775485246999027B3197955",
+        lpAddress: "0xfD04202CdeAbD9EBda2D4aa7F7569ed23F7ccC3a",
+        token: "",
+        quoteToken: "",
     },
     {
         pid: 2,
         lpSymbol: 'BUSD-BITX LP',
         logo: "./img/d.png",
-        lpAddress: "0x6e7E318067cB9b814A2F88E04559E1b0ada5d24A",
-        token: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
-        quoteToken: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        lpAddress: "0x898393FD706DC9128f57e7A46DE763840c2Ff393",
+        token: "",
+        quoteToken: "",
     },
     {
         pid: 3,
         lpSymbol: 'BNB-BITX LP',
         logo: "./img/d.png",
-        lpAddress: "0xaF7470E99bA6F624DF58C4ebeCdAaA9922376Ca1",
-        token: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
-        quoteToken: "0xBb622cEba240980B3D6A200108e1753bc928ADb3",
+        lpAddress: "0xb1b6e19D5288d98C4c868bb78D241425dC60d5e1",
+        token: "",
+        quoteToken: "",
     }
 ]
 
