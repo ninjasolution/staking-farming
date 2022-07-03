@@ -4,17 +4,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { setWalletConnectAction } from "../../store/actions/GlobalActions";
 import CalculatorsSvg from "../../Components/Icons/SvgIcons/CalculatorsSvg";
 import { formatPrice } from "../../utils/formatHelpers"
-import { Modal } from "rsuite"
+import { Modal, Radio, RadioGroup } from "rsuite"
 import Moralis from "moralis";
-import { Farms, MasterChefAddr, TotalAllocPoint } from '../../config/constances';
+import { backendLink, Farms, MasterChefAddr, TotalAllocPoint } from '../../config/constances';
 import { Interface } from '@ethersproject/abi'
 import MasterChef from "../../backend/abis/MasterChef.json";
 import LpToken from "../../backend/abis/lpToken.json";
 import BEP20 from "../../backend/abis/BEP20.json";
 import { getFarmApr } from '../../utils/getApr';
 import BigNumber from "bignumber.js"
+import axios from "axios";
 
-export default function LpTokens() {
+export default function LPTokens() {
 
   const [tabActive, setTabActive] = useState(true);
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function LpTokens() {
   const [ unstakeModal, setUnstakeModal ] = useState(false);
   const [ maxUnstake, setMaxUnstake ]= useState(false);
   const [ maxStake, setMaxStake ] = useState(false);
+  const [ duration, setDuration ] = useState(0);
   const [ stakeAmount, setStakeAmount ] = useState(0);
   const [ unstakeAmount, setUnstakeAmount ] = useState(0);
   const masterChefContract = useSelector(s => s.wallet.masterChef);
@@ -179,13 +181,37 @@ export default function LpTokens() {
   const harvestHandler = async (pid) => {
     try{
       await masterChefContract.methods.withdraw(pid, 0).send({from: account});
+      try {
+        const res =await axios.post(`${backendLink}/api/transaction/stake`, {
+          account: account,
+          type: 2,
+          time: Date.now(),
+          currency: selPid
+        })
+        console.log(res)
+      }catch (err){
+        console.log(err)
+      }
       loadHandler();
     }catch { }
   }
 
   const stakeBitxHandler = async () => {
     try{
-      await masterChefContract.methods.deposit(selPid, Moralis.Units.ETH(stakeAmount)).send({from: account});
+      await masterChefContract.methods.deposit(selPid, Moralis.Units.ETH(stakeAmount), Number.parseInt(duration) * 20 * 60 * 24 * 30).send({from: account});
+      try {
+        const res =await axios.post(`${backendLink}/api/staking`, {
+          account: account,
+          amount: stakeAmount,
+          type: 0,
+          duration,
+          time: Date.now(),
+          currency: selPid
+        })
+        console.log(res)
+      }catch (err){
+        console.log(err)
+      }
       setStakeAmount(0);
       setStakModal(false)
       loadHandler();
@@ -194,12 +220,29 @@ export default function LpTokens() {
 
   const unstakeBitxHandler = async () => {
     try{
+      let _amount = 0;
       if(maxUnstake) {
         let amount = lpFarms.find(l => l.pid === selPid)?.detail.amount;
+        _amount = Number.parseInt(amount/Math.pow(10, 18));
         await masterChefContract.methods.withdraw(selPid, amount).send({from: account});
       }else {
         await masterChefContract.methods.withdraw(selPid, Moralis.Units.ETH(unstakeAmount)).send({from: account});
+        _amount = unstakeAmount
       }
+
+      try {
+        const res =await axios.post(`${backendLink}/api/transaction/stake`, {
+          account: account,
+          amount: _amount,
+          type: 1,
+          time: Date.now(),
+          currency: selPid
+        })
+        console.log(res)
+      }catch (err){
+        console.log(err)
+      }
+      
       setUnstakeAmount(0);
       setUnstakeModal(false);
     }catch { }
@@ -423,7 +466,7 @@ export default function LpTokens() {
                                         setStakModal(true)
                                       }} >Stake</button>
                                       <button className="btn_connect_wallet mt-3" 
-                                      disabled={!(v.earned > 0)}
+                                      disabled={!(v.earned > 0 && (v.startAt + v.duration) < Date.now() / 1000)}
                                       onClick={() => {
                                         setSelPid(v.pid)
                                         setUnstakeModal(true)
@@ -455,7 +498,7 @@ export default function LpTokens() {
           </div>
         </div>
       </div>
-
+{/* 
       <Modal open={stakeModal} onClose={() => setStakModal(false)}  style={{marginTop: "100px"}}>
           <Modal.Body>
             <div style={{maxWidth: "400px", margin: "auto"}}>
@@ -476,7 +519,7 @@ export default function LpTokens() {
               >Confirm</button>
             </div>
           </Modal.Body>
-        </Modal>
+        </Modal> */}
 
         <Modal open={unstakeModal} onClose={() => setUnstakeModal(false)}  style={{marginTop: "100px"}}>
           <Modal.Body>
@@ -499,6 +542,38 @@ export default function LpTokens() {
             </div>
           </Modal.Body>
         </Modal>
+
+        <Modal open={stakeModal} onClose={() => setStakModal(false)}  style={{marginTop: "100px"}}>
+          <Modal.Body>
+            
+            <div style={{maxWidth: "400px", margin: "auto"}}>
+              <div className="row">
+                <RadioGroup name="radioList" style={{content: "auto"}} inline onChange={e => setDuration(e)}>
+                  <Radio value="0">None</Radio>
+                  <Radio value="3">3 M</Radio>
+                  <Radio value="4">4 M</Radio>
+                  <Radio value="6">6 M</Radio>
+                </RadioGroup>
+              </div>
+              <div className='row mt-3 mb-3'>
+                <div className='col-9 form-group'>
+                  <input className="form-control" type="number" onChange={e => setUnstakeAmount(e.target.value)} value={unstakeAmount}/>
+                </div>
+                <div className='col-3'>
+                  <button className="btn_max" onClick={() => {
+                    setMaxStake(true)
+                    setStakeAmount((lpFarms.find(l => l.pid === selPid)?.detail?.amount)/Math.pow(10, 18))
+                  }}>Max</button>
+                </div>
+              </div>
+              <button className="btn_connect_wallet" 
+                onClick={() => stakeBitxHandler()}
+                disabled={(lpFarms.find(l => l.pid === selPid)?.detail.amount)/Math.pow(10, 18) < unstakeAmount}
+              >Confirm</button>
+            </div>
+          </Modal.Body>
+        </Modal>
+
     </section>
   );
 }

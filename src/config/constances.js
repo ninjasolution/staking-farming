@@ -53,6 +53,32 @@ export const Farms = [
         lpAddress: "0xb1b6e19D5288d98C4c868bb78D241425dC60d5e1",
         token: "",
         quoteToken: "",
+    },
+    {
+        pid: 4,
+        lpSymbol: 'BITX',
+        logo: "./img/d.png",
+        lpAddress: BitxAddr,
+        token: "",
+        quoteToken: "",
+    },
+    {
+        pid: 5,
+        lpSymbol: 'USDT',
+        logo: "./img/icons/icon1.png",
+        lpAddress: USDTAddr,
+        token: "",
+        quoteToken: "",
+    },
+    {
+        pid: 6,
+        lpSymbol: 'BUSD',
+        logo: "./img/icons/icon2.png",
+        lpAddress: BUSDAddr,
+        token: "",
+        quoteToken: "",
     }
+
 ]
 
+export const backendLink = "http://192.168.104.102:8000";

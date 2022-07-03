@@ -989,6 +989,8 @@ contract MasterChef is Ownable {
         //   2. User receives the pending reward sent to his/her address.
         //   3. User's `amount` gets updated.
         //   4. User's `rewardDebt` gets updated.
+        uint256 startAt;
+        uint256 duration;
     }
 
     // Info of each pool.
@@ -999,6 +1001,7 @@ contract MasterChef is Ownable {
         uint256 accBusdPerShare; // Accumulated Busds per share, times 1e12. See below.
     }
 
+    
     // The BITX TOKEN!
     BEP20 public bitx;
     // The BUSD TOKEN!
@@ -1189,7 +1192,7 @@ contract MasterChef is Ownable {
     }
 
     // Deposit LP tokens to MasterChef for Busd allocation.
-    function deposit(uint256 _pid, uint256 _amount) public {
+    function deposit(uint256 _pid, uint256 _amount, uint256 _duration) public {
 
         require (_pid != 0, 'deposit Busd by staking');
 
@@ -1202,9 +1205,14 @@ contract MasterChef is Ownable {
                 safeBusdTransfer(msg.sender, pending);
             }
         }
+
+        if (user.amount == 0) {
+            user.startAt = block.timestamp;
+        }
         if (_amount > 0) {
             pool.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
             user.amount = user.amount.add(_amount);
+            user.duration = user.duration.add(_duration);
         }
         user.rewardDebt = user.amount.mul(pool.accBusdPerShare).div(1e12);
         emit Deposit(msg.sender, _pid, _amount);
@@ -1223,7 +1231,8 @@ contract MasterChef is Ownable {
         if(pending > 0) {
             safeBusdTransfer(msg.sender, pending);
         }
-        if(_amount > 0) {
+        if(_amount > 0 && user.startAt.add(user.duration) < block.timestamp) {
+
             user.amount = user.amount.sub(_amount);
             pool.lpToken.safeTransfer(address(msg.sender), _amount);
         }
