@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useMoralis, useTokenPrice, useERC20Balances } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux"
 import { BitxAddr, BUSDAddr } from '../config/constances';
-import { setbusdPriceAction, setWalletConnectAction } from "../store/actions/GlobalActions";
+import { setWalletConnectAction } from "../store/actions/GlobalActions";
 import { formatPrice } from '../utils/formatHelpers';
 import BEP20 from "../backend/abis/BEP20.json";
 import { Interface } from '@ethersproject/abi'
@@ -142,13 +142,6 @@ export default function TotalHarvest() {
                       { formatPrice(userInfo?.amount) }
                     </strong>
                   </li>
-                  {/* <li>
-                    To be claimed in 15 days :<strong>0.000</strong>
-                  </li>
-                  <li>
-                    (Auto renew 15 days release when you harvest <br /> again)
-                  </li> */}
-
                   <li>
                     {
                       isAuthenticated ?

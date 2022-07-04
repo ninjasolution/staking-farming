@@ -4,11 +4,11 @@ export const MeatVaultAddr = "0x56729f679582E844eEaF36D223498355c93FE97D";
 
 export const BitxAddr = "0x169Be05e2EE643c4d0A467BF07f3Ad9f720271D4";
 
-export const UsdtBitxLpAddr = "0xfD04202CdeAbD9EBda2D4aa7F7569ed23F7ccC3a";
+export const UsdtBitxLpAddr = "0x276a843E8e5dD8318B29924172B2426D0dB8699C";
 
-export const BusdBitxLpAddr = "0x898393FD706DC9128f57e7A46DE763840c2Ff393";
+export const BusdBitxLpAddr = "0x7c1F78B88C8DB3143179CB9F2a52C0fE39F3a591";
 
-export const BitxbusdLpAddr = "0xb1b6e19D5288d98C4c868bb78D241425dC60d5e1";
+export const BitxBnbLpAddr = "0x1a74ee9730724F25A364B95f07a32fcaf0377EbC";
 
 export const MulticallAddr = "0x91598056613c69b189Df336c12B11F9C180aFC0d"; //testnet
 // export const MulticallAddr = "0x41263cba59eb80dc200f3e2544eda4ed6a90e76c";
@@ -26,7 +26,7 @@ export const TotalAllocPoint = 3000;
 export const lpAprs = {
     [UsdtBitxLpAddr]: 5,
     [BusdBitxLpAddr]: 5,
-    [BitxbusdLpAddr]: 5,
+    [BitxBnbLpAddr]: 5,
     [USDTAddr]: 5,
     [BUSDAddr]: 5,
     [BitxAddr]: 5,
@@ -38,7 +38,7 @@ export const Farms = [
         lpSymbol: 'BITX-USDT LP',
         logo: "./img/t.png",
         width: 33,
-        lpAddress: "0x276a843E8e5dD8318B29924172B2426D0dB8699C",
+        lpAddress: UsdtBitxLpAddr,
         token: "",
         quoteToken: "",
     },
@@ -47,7 +47,7 @@ export const Farms = [
         lpSymbol: 'BUSD-BITX LP',
         logo: "./img/d.png",
         width: 33,
-        lpAddress: "0x7c1F78B88C8DB3143179CB9F2a52C0fE39F3a591",
+        lpAddress: BusdBitxLpAddr,
         token: "",
         quoteToken: "",
     },
@@ -56,7 +56,7 @@ export const Farms = [
         lpSymbol: 'BNB-BITX LP',
         logo: "./img/d.png",
         width: 33,
-        lpAddress: "0x1a74ee9730724F25A364B95f07a32fcaf0377EbC",
+        lpAddress: BitxBnbLpAddr,
         token: "",
         quoteToken: "",
     },
