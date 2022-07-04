@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useMoralis } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux"
-import { setWalletConnectAction } from "../../store/actions/GlobalActions";
-import CalculatorsSvg from "../../Components/Icons/SvgIcons/CalculatorsSvg";
-import { BitxAddr, MeatVaultAddr } from '../../config/constances';
+import { setWalletConnectAction } from "../store/actions/GlobalActions";
+import CalculatorsSvg from "../Components/CalculatorsSvg";
+import { BitxAddr, MeatVaultAddr } from '../config/constances';
 import Moralis from "moralis";
-import { formatPrice } from "../../utils/formatHelpers"
+import { formatPrice } from "../utils/formatHelpers"
 import { Modal } from "rsuite"
-import Meatvault from "../../backend/abis/LockBitx.json";
-import Bitx from "../../backend/abis/BEP20.json";
+import Meatvault from "../backend/abis/LockBitx.json";
+import Bitx from "../backend/abis/BEP20.json";
 import { Interface } from '@ethersproject/abi'
 import BigNumber from "bignumber.js";
 

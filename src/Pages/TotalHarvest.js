@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useMoralis, useTokenPrice, useERC20Balances } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux"
-import { BitxAddr, BUSDAddr } from '../../config/constances';
-import { setbusdPriceAction, setWalletConnectAction } from "../../store/actions/GlobalActions";
-import { formatPrice } from '../../utils/formatHelpers';
-import BEP20 from "../../backend/abis/BEP20.json";
+import { BitxAddr, BUSDAddr } from '../config/constances';
+import { setbusdPriceAction, setWalletConnectAction } from "../store/actions/GlobalActions";
+import { formatPrice } from '../utils/formatHelpers';
+import BEP20 from "../backend/abis/BEP20.json";
 import { Interface } from '@ethersproject/abi'
 import BigNumber from 'bignumber.js';
 

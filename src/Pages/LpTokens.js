@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useMoralis } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux"
-import { setWalletConnectAction } from "../../store/actions/GlobalActions";
-import CalculatorsSvg from "../../Components/Icons/SvgIcons/CalculatorsSvg";
-import { formatPrice } from "../../utils/formatHelpers"
+import { setWalletConnectAction } from "../store/actions/GlobalActions";
+import CalculatorsSvg from "../Components/CalculatorsSvg";
+import { formatPrice } from "../utils/formatHelpers"
 import { Modal, Radio, RadioGroup } from "rsuite"
 import Moralis from "moralis";
-import { backendLink, Farms, MasterChefAddr, TotalAllocPoint } from '../../config/constances';
+import { backendLink, Farms, MasterChefAddr, TotalAllocPoint } from '../config/constances';
 import { Interface } from '@ethersproject/abi'
-import MasterChef from "../../backend/abis/MasterChef.json";
-import LpToken from "../../backend/abis/lpToken.json";
-import BEP20 from "../../backend/abis/BEP20.json";
-import { getFarmApr } from '../../utils/getApr';
+import MasterChef from "../backend/abis/MasterChef.json";
+import LpToken from "../backend/abis/lpToken.json";
+import BEP20 from "../backend/abis/BEP20.json";
+import { getFarmApr } from '../utils/getApr';
 import BigNumber from "bignumber.js"
 import axios from "axios";
 
@@ -274,9 +274,7 @@ export default function LPTokens() {
           </div>
         </div>
         <div className="section_body">
-          <div className="section_body_title">
-            <h4 className="title">LP token</h4>
-          </div>
+          
           <div className="section_body_content">
             {tabActive ? (
               <ul className="lp_token_list">

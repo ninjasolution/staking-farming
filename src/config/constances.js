@@ -82,3 +82,5 @@ export const Farms = [
 ]
 
 export const backendLink = "http://192.168.104.102:8000";
+
+export const defaultRPC = "https://api.avax-test.network/ext/bc/C/rpc" // https://bsc-dataseed1.ninicoin.io

@@ -1,6 +1,6 @@
 import Base from "./Layout/Base/Base";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SteakStake from "./Pages/Farms";
+import SteakStake from "./Pages";
 import "./App.css";
 
 function App() {

@@ -11,7 +11,7 @@ import MasterChef from "../../backend/abis/MasterChef.json";
 import MeatVault from "../../backend/abis/LockBitx.json";
 import Multicall from "../../backend/abis/Multicall.json";
 
-import { BitxAddr, MasterChefAddr, MeatVaultAddr, MulticallAddr, BUSDAddr, USDTAddr, ETHAddr } from "../../config/constances";
+import { BitxAddr, MasterChefAddr, MeatVaultAddr, MulticallAddr, BUSDAddr, USDTAddr, ETHAddr, defaultRPC } from "../../config/constances";
 
 import { setBitxContractAction, setMasterChefContractAction, setMeatContractAction, setMeatVaultContractAction, setMulticallAction, setWeb3Action } from "../../store/actions/WalletActions";
 import "./Header.css";
@@ -203,7 +203,7 @@ function Header() {
 		(async () => {
 
       // let web3Ins = new Web3(web3?.provider || "https://data-seed-prebsc-1-s1.binance.org:8545/");
-      let web3Ins = new Web3(web3?.provider || "https://bsc-dataseed1.ninicoin.io");
+      let web3Ins = new Web3(web3?.provider || defaultRPC);
       
       dispatch(setWeb3Action(web3Ins))
       const multi = new web3Ins.eth.Contract(Multicall, MulticallAddr)

@@ -551,7 +551,7 @@
   width: 7.5rem;
   top: 0px;
   height: 5.6rem;
-  background: url("../../images/img_token_side.png") center/contain no-repeat;
+  background: url("../images/img_token_side.png") center/contain no-repeat;
 }
 
 #SteakStake #Section3 .section_body .section_body_content .lp_token_list > li .flex_list_box {
