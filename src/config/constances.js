@@ -21,12 +21,15 @@ export const ETHAddr = "0x2170Ed0880ac9A755fd29B2688956BD959F933F8";
 
 export const CAKE_PER_YEAR = 12614;
 
-export const TotalAllocPoint = 1500;
+export const TotalAllocPoint = 3000;
 
 export const lpAprs = {
     [UsdtBitxLpAddr]: 5,
     [BusdBitxLpAddr]: 5,
     [BitxbusdLpAddr]: 5,
+    [USDTAddr]: 5,
+    [BUSDAddr]: 5,
+    [BitxAddr]: 5,
 }
 
 export const Farms = [
