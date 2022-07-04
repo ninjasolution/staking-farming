@@ -285,6 +285,7 @@ export default function LPTokens() {
                           <img
                             style={{ marginRight: "1rem" }}
                             src={v.logo}
+                            width={v.width}
                             alt=""
                           />
                           <div className="currency_content">
@@ -349,8 +350,6 @@ export default function LPTokens() {
                             )}
                           </button>
 
-                          {/* for dropdown view letter */}
-                          {/* <ul className="dropdown_details_view"><li></li></ul> */}
                         </div>
                       </div>
 
