@@ -78,7 +78,6 @@ export default function LPTokens() {
           let apr = 0;
   
           if(isAuthenticated) {
-            console.log(account)
             let calls = [
               { address: Farms[i].lpAddress, name: 'allowance', params: [account, MasterChefAddr] },
               { address: Farms[i].lpAddress, name: 'balanceOf', params: [account] },
@@ -496,28 +495,6 @@ export default function LPTokens() {
           </div>
         </div>
       </div>
-{/* 
-      <Modal open={stakeModal} onClose={() => setStakModal(false)}  style={{marginTop: "100px"}}>
-          <Modal.Body>
-            <div style={{maxWidth: "400px", margin: "auto"}}>
-            <div className='row mb-3'>
-                <div className='col-9 form-group'>
-                  <input className="form-control" type="number" onChange={e => setStakeAmount(e.target.value)} value={stakeAmount}/>
-                </div>
-                <div className='col-3'>
-                  <button className="btn_max" onClick={() => {
-                    setMaxStake(true)
-                    setStakeAmount((lpFarms.find(l => l.pid === selPid)?.balance)/Math.pow(10, 18))
-                  }}>Max</button>
-                </div>
-              </div>
-              <button className="btn_connect_wallet" 
-              disabled={(lpFarms.find(l => l.pid === selPid)?.balance)/Math.pow(10, 18) < stakeAmount}
-              onClick={() => stakeBitxHandler()}
-              >Confirm</button>
-            </div>
-          </Modal.Body>
-        </Modal> */}
 
         <Modal open={unstakeModal} onClose={() => setUnstakeModal(false)}  style={{marginTop: "100px"}}>
           <Modal.Body>
@@ -566,7 +543,6 @@ export default function LPTokens() {
               </div>
               <button className="btn_connect_wallet" 
                 onClick={() => stakeBitxHandler()}
-                disabled={(lpFarms.find(l => l.pid === selPid)?.detail.amount)/Math.pow(10, 18) < unstakeAmount}
               >Confirm</button>
             </div>
           </Modal.Body>
