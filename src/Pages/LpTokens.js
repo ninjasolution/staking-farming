@@ -531,7 +531,7 @@ export default function LPTokens() {
               </div>
               <div className='row mt-3 mb-3'>
                 <div className='col-9 form-group'>
-                  <input className="form-control" type="number" onChange={e => setUnstakeAmount(e.target.value)} value={unstakeAmount}/>
+                  <input className="form-control" type="number" onChange={e => setStakeAmount(e.target.value)} value={stakeAmount}/>
                 </div>
                 <div className='col-3'>
                   <button className="btn_max" onClick={() => {
