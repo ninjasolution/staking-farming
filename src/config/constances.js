@@ -1,8 +1,8 @@
-export const MasterChefAddr = "0x5EC2f3aBb2EF1A5C463071B8773DF54623312cdC";
+export const MasterChefAddr = "0x2D91ADd4bCDbb90d980D4f526A897ccd7Ad1e237";
 
-export const MeatVaultAddr = "0x0350C4D343F51f75114F4bd65Cba44508d4A758c";
+export const MeatVaultAddr = "0x56729f679582E844eEaF36D223498355c93FE97D";
 
-export const BitxAddr = "0x72e426688eA777178e545dD6FA03e922223c7099";
+export const BitxAddr = "0x169Be05e2EE643c4d0A467BF07f3Ad9f720271D4";
 
 export const UsdtBitxLpAddr = "0xfD04202CdeAbD9EBda2D4aa7F7569ed23F7ccC3a";
 
@@ -13,9 +13,9 @@ export const BitxbusdLpAddr = "0xb1b6e19D5288d98C4c868bb78D241425dC60d5e1";
 export const MulticallAddr = "0x6e5BB1a5Ad6F68A8D7D6A5e47750eC15773d6042"; //testnet
 // export const MulticallAddr = "0x41263cba59eb80dc200f3e2544eda4ed6a90e76c";
 
-export const BUSDAddr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+export const BUSDAddr = "0x8178427c7B2334522C2D23Eda02f25cF03001C30";
 
-export const USDTAddr = "0x55d398326f99059fF775485246999027B3197955";
+export const USDTAddr = "0x66Ca77F98106585f3A3D8411A2b16E734FbDF841";
 
 export const ETHAddr = "0x2170Ed0880ac9A755fd29B2688956BD959F933F8";
 
@@ -34,7 +34,7 @@ export const Farms = [
         pid: 1,
         lpSymbol: 'BITX-USDT LP',
         logo: "./img/t.png",
-        lpAddress: "0xfD04202CdeAbD9EBda2D4aa7F7569ed23F7ccC3a",
+        lpAddress: "0x276a843E8e5dD8318B29924172B2426D0dB8699C",
         token: "",
         quoteToken: "",
     },
@@ -42,7 +42,7 @@ export const Farms = [
         pid: 2,
         lpSymbol: 'BUSD-BITX LP',
         logo: "./img/d.png",
-        lpAddress: "0x898393FD706DC9128f57e7A46DE763840c2Ff393",
+        lpAddress: "0x7c1F78B88C8DB3143179CB9F2a52C0fE39F3a591",
         token: "",
         quoteToken: "",
     },
@@ -50,7 +50,7 @@ export const Farms = [
         pid: 3,
         lpSymbol: 'BNB-BITX LP',
         logo: "./img/d.png",
-        lpAddress: "0xb1b6e19D5288d98C4c868bb78D241425dC60d5e1",
+        lpAddress: "0x1a74ee9730724F25A364B95f07a32fcaf0377EbC",
         token: "",
         quoteToken: "",
     },
