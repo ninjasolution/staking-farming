@@ -16,7 +16,7 @@ export default function TotalHarvest() {
     const meatVaultContract = useSelector(s => s.wallet.meatVault);
     const [ pendingAmount, setPendingAmount ] = useState(0);
     const { data: busdPrice } = useTokenPrice({chain: "bsc", address: BUSDAddr.toLowerCase()})
-    const { data: bitxPrice } = useTokenPrice({chain: "bsc", address: "0xBb622cEba240980B3D6A200108e1753bc928ADb3".toLowerCase()})
+    const { data: bitxPrice } = useTokenPrice({chain: "bsc", address: BitxAddr.toLowerCase()})
     const multicall = useSelector(s => s.wallet.multicall);
     const [ bitxBalance, setBitBalance ] = useState(0);
     const [ busdBalance, setBusdBalance ] = useState(0);

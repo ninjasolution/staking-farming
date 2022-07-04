@@ -10,7 +10,7 @@ export const BusdBitxLpAddr = "0x898393FD706DC9128f57e7A46DE763840c2Ff393";
 
 export const BitxbusdLpAddr = "0xb1b6e19D5288d98C4c868bb78D241425dC60d5e1";
 
-export const MulticallAddr = "0x6e5BB1a5Ad6F68A8D7D6A5e47750eC15773d6042"; //testnet
+export const MulticallAddr = "0x91598056613c69b189Df336c12B11F9C180aFC0d"; //testnet
 // export const MulticallAddr = "0x41263cba59eb80dc200f3e2544eda4ed6a90e76c";
 
 export const BUSDAddr = "0x8178427c7B2334522C2D23Eda02f25cF03001C30";
