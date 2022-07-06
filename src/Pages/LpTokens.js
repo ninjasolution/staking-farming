@@ -472,7 +472,9 @@ export default function LPTokens() {
                                   :
                                   <button className="btn_connect_wallet" onClick={() => {
                                     enableBitxHandler(v.pid, v.lpAddress);
-                                  }}>Enable</button>
+                                  }}
+                                  disabled={!(v.balance > 0)}
+                                  >Enable</button>
                                   :
                                   <button className="btn_connect_wallet" onClick={() => {
                                     dispatch(setWalletConnectAction(true));
