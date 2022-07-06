@@ -99,7 +99,7 @@ export default function LPTokens() {
             multiplier = new BigNumber(res1[0].allocPoint/100).toJSON();
             detail = res1[1];
     
-            if(res[1] > 0 && res[0] >= res[1]) {
+            if(res[1] > 0 && res[0] - res[1] > 0) {
               _approves.push(Farms[i].pid)
             }
             allowance = new BigNumber(res[0]).toJSON();
