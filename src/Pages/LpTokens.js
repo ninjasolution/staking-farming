@@ -557,7 +557,7 @@ export default function LPTokens() {
                 <div className='col-3'>
                   <button className="btn_max" onClick={() => {
                     setMaxStake(true)
-                    setStakeAmount((lpFarms.find(l => l.pid === selPid)?.detail?.amount)/Math.pow(10, 18))
+                    setStakeAmount((lpFarms.find(l => l.pid === selPid)?.balance)/Math.pow(10, 18))
                   }}>Max</button>
                 </div>
               </div>
