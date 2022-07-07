@@ -32,6 +32,7 @@ export default function LPTokens() {
   const web3 = useSelector(s => s.wallet.web3);
   const [ selPid, setSelPid ] = useState(0);
   const [ isOnlyStaked, setIsOnlyStaked ] = useState(false);
+  const [ expandMode, setExpandMode ] = useState(false);
     
   const [isDropdownEnabled, setIsDropdownEnabled] = useState([]);
   const { isAuthenticated, account } = useMoralis();
@@ -459,6 +460,7 @@ export default function LPTokens() {
                                       disabled={!(v.balance > 0)}
                                       onClick={() => {
                                         setSelPid(v.pid)
+                                        setExpandMode(v.earned > 0 ? true : false)
                                         setStakModal(true)
                                       }} >Stake</button>
                                       <button className="btn_connect_wallet mt-3" 
@@ -525,10 +527,23 @@ export default function LPTokens() {
             <div style={{maxWidth: "400px", margin: "auto"}}>
               <div className="row">
                 <RadioGroup name="radioList" style={{content: "auto"}} inline onChange={e => setDuration(e)}>
-                  <Radio value="0">None</Radio>
-                  <Radio value="3">3 M</Radio>
+                {
+                  expandMode ?
+                  (
+                  <Radio value="0">Continue</Radio>
+                  <Radio value="4">+4 M</Radio>
+                  <Radio value="9">+9 M</Radio>
+                  <Radio value="12">+12 M</Radio>
+                  <Radio value="18">+18 M</Radio>
+                  ) : 
+                  (
                   <Radio value="4">4 M</Radio>
-                  <Radio value="6">6 M</Radio>
+                  <Radio value="9">9 M</Radio>
+                  <Radio value="12">12 M</Radio>
+                  <Radio value="18">18 M</Radio>
+                  )
+                }
+                  
                 </RadioGroup>
               </div>
               <div className='row mt-3 mb-3'>
