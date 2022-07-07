@@ -530,17 +530,21 @@ export default function LPTokens() {
                 {
                   expandMode ?
                   (
-                  <Radio value="0">Continue</Radio>
-                  <Radio value="4">+4 M</Radio>
-                  <Radio value="9">+9 M</Radio>
-                  <Radio value="12">+12 M</Radio>
-                  <Radio value="18">+18 M</Radio>
+                    <div>
+                      <Radio value="0">Continue</Radio>
+                      <Radio value="4">+4 M</Radio>
+                      <Radio value="9">+9 M</Radio>
+                      <Radio value="12">+12 M</Radio>
+                      <Radio value="18">+18 M</Radio>
+                    </div>
                   ) : 
                   (
-                  <Radio value="4">4 M</Radio>
-                  <Radio value="9">9 M</Radio>
-                  <Radio value="12">12 M</Radio>
-                  <Radio value="18">18 M</Radio>
+                    <div>
+                      <Radio value="4">4 M</Radio>
+                      <Radio value="9">9 M</Radio>
+                      <Radio value="12">12 M</Radio>
+                      <Radio value="18">18 M</Radio>
+                    </div>
                   )
                 }
                   
