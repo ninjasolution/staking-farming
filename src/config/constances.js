@@ -1,4 +1,4 @@
-export const MasterChefAddr = "0x2D91ADd4bCDbb90d980D4f526A897ccd7Ad1e237";
+export const MasterChefAddr = "0xcf1E9390427BD3Cf15CFE1b53A886A7e573f37F2";
 
 export const MeatVaultAddr = "0x56729f679582E844eEaF36D223498355c93FE97D";
 
