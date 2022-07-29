@@ -528,16 +528,7 @@ export default function LPTokens() {
               <div className="row">
                 <RadioGroup name="radioList" style={{content: "auto"}} inline onChange={e => setDuration(e)}>
                 {
-                  expandMode ?
-                  (
-                    <div>
-                      <Radio value="0">Continue</Radio>
-                      <Radio value="4">+4 M</Radio>
-                      <Radio value="9">+9 M</Radio>
-                      <Radio value="12">+12 M</Radio>
-                      <Radio value="18">+18 M</Radio>
-                    </div>
-                  ) : 
+                  ! expandMode &&
                   (
                     <div>
                       <Radio value="4">4 M</Radio>
