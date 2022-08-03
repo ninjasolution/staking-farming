@@ -457,7 +457,7 @@ export default function LPTokens() {
                                   (
                                     <>
                                       <button className="btn_connect_wallet mb-2" 
-                                      disabled={!(v.balance > 0)}
+                                      disabled={!(v.balance > 0) || v.earned > 0}
                                       onClick={() => {
                                         setSelPid(v.pid)
                                         setExpandMode(v.earned > 0 ? true : false)
@@ -475,7 +475,7 @@ export default function LPTokens() {
                                   <button className="btn_connect_wallet" onClick={() => {
                                     enableBitxHandler(v.pid, v.lpAddress);
                                   }}
-                                  disabled={!(v.balance > 0)}
+                                  disabled={!(v.balance > 0)  || v.earned > 0}
                                   >Enable</button>
                                   :
                                   <button className="btn_connect_wallet" onClick={() => {
